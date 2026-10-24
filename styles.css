@@ -1,0 +1,1972 @@
+/* =========================================================
+   CHAT EVERYWHERE
+   MODERN OBSIDIAN + EMERALD DESIGN
+   ========================================================= */
+
+:root {
+  --fc-bg: #080b0a;
+  --fc-panel: #0d1210;
+  --fc-panel-2: #111815;
+  --fc-panel-3: #17211c;
+
+  --fc-primary: #10b981;
+  --fc-primary-light: #34d399;
+  --fc-primary-dark: #059669;
+
+  --fc-accent: #22c55e;
+
+  --fc-text: #f5f7f6;
+  --fc-text-soft: #c7d2cd;
+  --fc-text-muted: #718079;
+
+  --fc-border: rgba(255, 255, 255, 0.08);
+
+  --fc-font:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  --fc-radius: 18px;
+
+  --fc-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.55);
+
+  --fc-green-glow:
+    0 10px 35px rgba(16, 185, 129, 0.25);
+}
+
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+#fc-floating-btn,
+#fc-chatbox,
+#fc-chatbox *,
+#fc-screenshot-overlay,
+#fc-screenshot-overlay * {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   FLOATING BUTTON
+   ========================================================= */
+
+#fc-floating-btn {
+  position: fixed;
+
+  right: 24px;
+  bottom: 24px;
+
+  width: 58px;
+  height: 58px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #19c98a,
+      #059669
+    );
+
+  color: #ffffff;
+
+  cursor: pointer;
+
+  z-index: 2147483647;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  font-family: var(--fc-font);
+  font-size: 23px;
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.35),
+    0 8px 30px rgba(16, 185, 129, 0.25);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-radius 0.2s ease;
+}
+
+#fc-floating-btn::after {
+  content: "";
+
+  position: absolute;
+
+  inset: -4px;
+
+  border-radius: 21px;
+
+  border: 1px solid rgba(52, 211, 153, 0.18);
+
+  pointer-events: none;
+}
+
+#fc-floating-btn:hover {
+  transform:
+    translateY(-4px)
+    scale(1.04);
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.4),
+    0 12px 40px rgba(16, 185, 129, 0.35);
+}
+
+#fc-floating-btn:active {
+  transform: scale(0.94);
+}
+
+
+/* =========================================================
+   CHATBOX
+   ========================================================= */
+
+#fc-chatbox {
+  position: fixed;
+
+  right: 24px;
+  bottom: 96px;
+
+  width: 380px;
+  height: 590px;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(15, 21, 18, 0.98),
+      rgba(7, 11, 9, 0.99)
+    );
+
+  color: var(--fc-text);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.09);
+
+  border-radius: 22px;
+
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(16, 185, 129, 0.04);
+
+  z-index: 2147483647;
+
+  font-family: var(--fc-font);
+
+  transform-origin: bottom right;
+
+  animation:
+    fc-pop-in 0.22s cubic-bezier(.2,.8,.2,1);
+
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+@keyframes fc-pop-in {
+  from {
+    opacity: 0;
+    transform:
+      translateY(16px)
+      scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+#fc-chatbox-header {
+  position: relative;
+
+  height: 68px;
+  min-height: 68px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 16px 0 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #111a15,
+      #0c120f
+    );
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.06);
+
+  flex: 0 0 68px;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  letter-spacing: -0.2px;
+}
+
+#fc-chatbox-header::before {
+  content: "";
+
+  width: 8px;
+  height: 8px;
+
+  position: absolute;
+
+  left: 18px;
+  bottom: 10px;
+
+  border-radius: 50%;
+
+  background: #22c55e;
+
+  box-shadow:
+    0 0 12px rgba(34, 197, 94, 0.75);
+}
+
+#fc-chatbox-header span {
+  padding-left: 16px;
+
+  color: #f0fdf4;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+   ========================================================= */
+
+#fc-chatbox-close {
+  width: 34px;
+  height: 34px;
+
+  padding: 0;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.06);
+
+  border-radius: 10px;
+
+  background:
+    rgba(255, 255, 255, 0.045);
+
+  color: #82908a;
+
+  cursor: pointer;
+
+  font-size: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+#fc-chatbox-close:hover {
+  background:
+    rgba(239, 68, 68, 0.12);
+
+  color: #fb7185;
+
+  transform: rotate(5deg);
+}
+
+
+/* =========================================================
+   TABS
+   ========================================================= */
+
+#fc-tabs {
+  height: 52px;
+  min-height: 52px;
+
+  display: flex;
+
+  padding: 6px;
+
+  gap: 4px;
+
+  background:
+    #0a0f0d;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.06);
+
+  flex: 0 0 52px;
+}
+
+#fc-tabs .fc-tab {
+  position: relative;
+
+  flex: 1;
+
+  min-width: 0;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: transparent;
+
+  color: #64726c;
+
+  cursor: pointer;
+
+  padding: 0;
+
+  font-family: var(--fc-font);
+
+  font-size: 11px;
+
+  font-weight: 650;
+
+  transition:
+    background 0.18s ease,
+    color 0.18s ease;
+}
+
+#fc-tabs .fc-tab:hover {
+  background:
+    rgba(16, 185, 129, 0.06);
+
+  color: #a7b9b1;
+}
+
+#fc-tabs .fc-tab.active {
+  color: #d1fae5;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(16, 185, 129, 0.15),
+      rgba(16, 185, 129, 0.05)
+    );
+
+  box-shadow:
+    inset 0 0 0 1px
+    rgba(16, 185, 129, 0.13);
+}
+
+#fc-tabs .fc-tab.active::after {
+  content: "";
+
+  position: absolute;
+
+  left: 30%;
+  right: 30%;
+
+  bottom: 3px;
+
+  height: 2px;
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #10b981,
+      #34d399
+    );
+
+  box-shadow:
+    0 0 9px rgba(16, 185, 129, 0.6);
+}
+
+
+/* =========================================================
+   TAB CONTENT
+   ========================================================= */
+
+#fc-tab-content {
+  flex: 1 1 auto;
+
+  min-height: 0;
+
+  position: relative;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(16, 185, 129, 0.035),
+      transparent 50%
+    ),
+    #080d0b;
+}
+
+
+/* =========================================================
+   TAB PANELS
+   ========================================================= */
+
+.fc-tab-panel {
+  display: none;
+
+  width: 100%;
+  height: 100%;
+
+  min-height: 0;
+
+  overflow-y: auto;
+
+  scrollbar-width: thin;
+
+  scrollbar-color:
+    #26332d
+    transparent;
+}
+
+.fc-tab-panel::-webkit-scrollbar {
+  width: 5px;
+}
+
+.fc-tab-panel::-webkit-scrollbar-thumb {
+  background: #26332d;
+
+  border-radius: 10px;
+}
+
+.fc-tab-panel.active {
+  display: block;
+}
+
+
+/* =========================================================
+   CHATS
+   ========================================================= */
+
+#fc-chats {
+  display: none;
+
+  width: 100%;
+  height: 100%;
+
+  min-height: 0;
+
+  overflow: hidden;
+
+  flex-direction: column;
+}
+
+#fc-chats.active {
+  display: flex;
+}
+
+
+/* =========================================================
+   MESSAGES
+   ========================================================= */
+
+#fc-chatbox-messages {
+  flex: 1 1 auto;
+
+  width: 100%;
+
+  min-height: 0;
+
+  padding: 18px;
+
+  overflow-y: auto;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(16, 185, 129, 0.035),
+      transparent 55%
+    );
+
+  scrollbar-width: thin;
+
+  scrollbar-color:
+    #26332d
+    transparent;
+}
+
+#fc-chatbox-messages::-webkit-scrollbar {
+  width: 5px;
+}
+
+#fc-chatbox-messages::-webkit-scrollbar-thumb {
+  background: #26332d;
+
+  border-radius: 10px;
+}
+
+
+/* =========================================================
+   MESSAGE
+   ========================================================= */
+
+.fc-message {
+  position: relative;
+
+  width: fit-content;
+
+  max-width: 78%;
+
+  margin-bottom: 10px;
+
+  padding: 10px 13px;
+
+  border-radius: 14px;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+
+  overflow-wrap: anywhere;
+
+  animation:
+    fc-message-in 0.18s ease-out;
+}
+
+@keyframes fc-message-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* USER MESSAGE */
+
+.fc-message.user {
+  margin-left: auto;
+
+  color: #ecfdf5;
+
+  background:
+    linear-gradient(
+      135deg,
+      #10b981,
+      #059669
+    );
+
+  border:
+    1px solid rgba(255, 255, 255, 0.1);
+
+  border-bottom-right-radius: 5px;
+
+  box-shadow:
+    0 7px 22px rgba(5, 150, 105, 0.2);
+}
+
+
+/* BOT MESSAGE */
+
+.fc-message.bot {
+  color: #d7e1dc;
+
+  background:
+    #121a16;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.055);
+
+  border-bottom-left-radius: 5px;
+}
+
+
+/* =========================================================
+   INPUT
+   ========================================================= */
+
+#fc-chatbox-input-row {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  width: 100%;
+
+  height: 66px;
+  min-height: 66px;
+
+  padding: 11px;
+
+  background:
+    #0a0f0d;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  flex: 0 0 66px;
+
+  position: relative;
+
+  z-index: 20;
+}
+
+#fc-chatbox-input {
+  display: block;
+
+  min-width: 0;
+
+  width: 100%;
+
+  flex: 1 1 auto;
+
+  height: 42px;
+
+  padding: 0 13px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 12px;
+
+  outline: none;
+
+  background:
+    #111815;
+
+  color: #f0fdf4;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  transition:
+    border 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+#fc-chatbox-input::placeholder {
+  color: #53625b;
+}
+
+#fc-chatbox-input:hover {
+  background: #141d18;
+}
+
+#fc-chatbox-input:focus {
+  border-color:
+    rgba(16, 185, 129, 0.65);
+
+  background:
+    #141e19;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(16, 185, 129, 0.1);
+}
+
+
+/* =========================================================
+   SEND
+   ========================================================= */
+
+#fc-chatbox-send {
+  flex: 0 0 auto;
+
+  height: 42px;
+
+  padding: 0 16px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #10b981,
+      #059669
+    );
+
+  color: white;
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  box-shadow:
+    0 6px 18px rgba(5, 150, 105, 0.25);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+}
+
+#fc-chatbox-send:hover {
+  filter: brightness(1.08);
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 9px 24px rgba(5, 150, 105, 0.35);
+}
+
+#fc-chatbox-send:active {
+  transform: scale(0.96);
+}
+
+
+/* =========================================================
+   GROUPS
+   ========================================================= */
+
+.fc-group-list {
+  width: 100%;
+
+  padding: 8px 0;
+}
+
+.fc-group-item {
+  width: calc(100% - 20px);
+
+  margin: 4px 10px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 12px;
+
+  border:
+    1px solid transparent;
+
+  border-radius: 14px;
+
+  background: transparent;
+
+  color: white;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.16s ease,
+    border 0.16s ease,
+    transform 0.16s ease;
+}
+
+.fc-group-item:hover {
+  background:
+    #111a16;
+
+  border-color:
+    rgba(16, 185, 129, 0.1);
+
+  transform: translateX(2px);
+}
+
+.fc-group-avatar {
+  width: 44px;
+  height: 44px;
+
+  margin-right: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(16, 185, 129, 0.16),
+      rgba(34, 197, 94, 0.06)
+    );
+
+  border:
+    1px solid rgba(16, 185, 129, 0.13);
+
+  font-size: 20px;
+}
+
+.fc-group-info {
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+.fc-group-name {
+  color: #edf5f1;
+
+  font-size: 13px;
+
+  font-weight: 650;
+}
+
+.fc-group-members {
+  margin-top: 4px;
+
+  color: #62716a;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   MEDIA
+   ========================================================= */
+
+.fc-media-section {
+  padding: 16px;
+}
+
+.fc-media-title {
+  margin-bottom: 12px;
+
+  color: #dce7e1;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+.fc-media-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 7px;
+}
+
+.fc-media-item {
+  position: relative;
+
+  aspect-ratio: 1;
+
+  overflow: hidden;
+
+  border-radius: 11px;
+
+  cursor: pointer;
+
+  background: #121a16;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.06);
+
+  transition:
+    transform 0.18s ease,
+    opacity 0.18s ease,
+    border 0.18s ease;
+}
+
+.fc-media-item:hover {
+  opacity: 0.9;
+
+  transform: scale(1.03);
+
+  border-color:
+    rgba(16, 185, 129, 0.25);
+}
+
+.fc-media-placeholder {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #121a16,
+      #1a251f
+    );
+
+  font-size: 28px;
+}
+
+.fc-files-title {
+  margin-top: 24px;
+}
+
+.fc-file-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.fc-file {
+  display: flex;
+  align-items: center;
+
+  padding: 10px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.05);
+
+  border-radius: 12px;
+
+  background:
+    #101713;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.fc-file:hover {
+  background: #151f1a;
+
+  transform: translateX(2px);
+}
+
+.fc-file-icon {
+  width: 38px;
+  height: 38px;
+
+  margin-right: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background:
+    rgba(16, 185, 129, 0.1);
+
+  font-size: 18px;
+}
+
+.fc-file-info {
+  min-width: 0;
+}
+
+.fc-file-name {
+  color: #dce7e1;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+.fc-file-size {
+  margin-top: 3px;
+
+  color: #607068;
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   SHARE
+   ========================================================= */
+
+.fc-share-section {
+  padding: 16px;
+}
+
+.fc-share-title {
+  margin-bottom: 12px;
+
+  color: #dce7e1;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+.fc-share-option {
+  width: 100%;
+
+  min-height: 62px;
+
+  margin-bottom: 7px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 10px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.05);
+
+  border-radius: 13px;
+
+  background:
+    #101713;
+
+  color: white;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.16s ease,
+    border 0.16s ease,
+    transform 0.16s ease;
+}
+
+.fc-share-option:hover {
+  background:
+    #151f1a;
+
+  border-color:
+    rgba(16, 185, 129, 0.18);
+
+  transform: translateX(2px);
+}
+
+.fc-share-icon {
+  width: 38px;
+  height: 38px;
+
+  margin-right: 11px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(16, 185, 129, 0.14),
+      rgba(34, 197, 94, 0.05)
+    );
+
+  font-size: 17px;
+}
+
+.fc-share-info {
+  flex: 1;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+.fc-share-info strong {
+  color: #dce7e1;
+
+  font-size: 12px;
+
+  font-weight: 650;
+}
+
+.fc-share-info small {
+  margin-top: 3px;
+
+  color: #607068;
+
+  font-size: 10px;
+}
+
+.fc-share-arrow {
+  color: #4f6058;
+
+  font-size: 20px;
+
+  transition:
+    transform 0.15s ease,
+    color 0.15s ease;
+}
+
+.fc-share-option:hover .fc-share-arrow {
+  color: #34d399;
+
+  transform: translateX(2px);
+}
+
+
+/* =========================================================
+   TOOLS
+   ========================================================= */
+
+.fc-tools-section {
+  padding: 16px;
+}
+
+.fc-tools-title {
+  margin-bottom: 12px;
+
+  color: #dce7e1;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+.fc-tool-option {
+  width: 100%;
+  margin-bottom: 8px;
+
+  min-height: 72px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 12px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.06);
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #101713,
+      #141f19
+    );
+
+  color: white;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  transition:
+    border 0.16s ease,
+    background 0.16s ease,
+    transform 0.16s ease;
+}
+
+.fc-tool-option:hover {
+  background:
+    linear-gradient(
+      135deg,
+      #15211b,
+      #18271f
+    );
+
+  border-color:
+    rgba(16, 185, 129, 0.25);
+
+  transform: translateY(-1px);
+}
+
+.fc-tool-icon {
+  width: 42px;
+  height: 42px;
+
+  margin-right: 11px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(16, 185, 129, 0.18),
+      rgba(34, 197, 94, 0.06)
+    );
+
+  font-size: 20px;
+}
+
+.fc-tool-info {
+  flex: 1;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+.fc-tool-info strong {
+  color: #dce7e1;
+
+  font-size: 12px;
+
+  font-weight: 650;
+}
+
+.fc-tool-info small {
+  margin-top: 4px;
+
+  color: #607068;
+
+  font-size: 10px;
+
+  line-height: 1.4;
+}
+
+.fc-tool-arrow {
+  color: #4f6058;
+
+  font-size: 21px;
+}
+
+
+/* =========================================================
+   DRAG & DROP
+   ========================================================= */
+
+#fc-chatbox.fc-drag-over {
+  outline:
+    2px dashed #10b981;
+
+  outline-offset: 4px;
+
+  box-shadow:
+    0 0 0 5px rgba(16, 185, 129, 0.07),
+    0 30px 90px rgba(0, 0, 0, 0.65);
+}
+
+
+/* =========================================================
+   YOUTUBE
+   ========================================================= */
+
+.fc-video-message {
+  width: 88%;
+
+  padding: 7px !important;
+
+  background:
+    #101713 !important;
+}
+
+.fc-video-message iframe {
+  display: block;
+
+  width: 100%;
+
+  aspect-ratio: 16 / 9;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #000;
+}
+
+.fc-video-link {
+  display: block;
+
+  margin-top: 7px;
+
+  padding: 0 3px;
+
+  color: #34d399;
+
+  font-size: 10px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  text-decoration: none;
+}
+
+.fc-video-link:hover {
+  color: #6ee7b7;
+}
+
+
+/* =========================================================
+   SCREENSHOT OVERLAY
+   ========================================================= */
+
+#fc-screenshot-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  background: transparent;
+
+  z-index: 2147483646;
+
+  font-family: var(--fc-font);
+
+  user-select: none;
+
+  cursor: crosshair;
+}
+
+
+/* =========================================================
+   SCREENSHOT TOP BAR
+   ========================================================= */
+
+#fc-screenshot-topbar {
+  position: fixed;
+
+  top: 14px;
+  left: 14px;
+  right: 14px;
+
+  height: 58px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 0 12px 0 16px;
+
+  background:
+    rgba(10, 16, 13, 0.94);
+
+  color: white;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 15px;
+
+  box-shadow:
+    0 15px 45px rgba(0, 0, 0, 0.5);
+
+  z-index: 10;
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+
+/* =========================================================
+   SCREENSHOT TITLE
+   ========================================================= */
+
+#fc-screenshot-title {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: #ecfdf5;
+
+  font-size: 14px;
+
+  font-weight: 700;
+}
+
+.fc-screenshot-title-icon {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #10b981,
+      #059669
+    );
+
+  font-size: 16px;
+
+  box-shadow:
+    0 5px 18px rgba(16, 185, 129, 0.3);
+}
+
+
+/* =========================================================
+   SCREENSHOT ACTIONS
+   ========================================================= */
+
+#fc-screenshot-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+}
+
+
+/* =========================================================
+   SCREENSHOT BUTTONS
+   ========================================================= */
+
+.fc-screenshot-button {
+  height: 36px;
+
+  padding: 0 15px;
+
+  border-radius: 9px;
+
+  border:
+    1px solid transparent;
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.fc-screenshot-button:hover {
+  transform: translateY(-1px);
+}
+
+.fc-screenshot-button:active {
+  transform: scale(0.96);
+}
+
+.fc-screenshot-button.secondary {
+  color: #cbd5d0;
+
+  background:
+    rgba(255, 255, 255, 0.06);
+
+  border-color:
+    rgba(255, 255, 255, 0.1);
+}
+
+.fc-screenshot-button.secondary:hover {
+  background:
+    rgba(255, 255, 255, 0.1);
+}
+
+.fc-screenshot-button.primary {
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #10b981,
+      #059669
+    );
+
+  box-shadow:
+    0 6px 18px rgba(5, 150, 105, 0.3);
+}
+
+.fc-screenshot-button.primary:hover {
+  box-shadow:
+    0 9px 25px rgba(5, 150, 105, 0.4);
+}
+
+
+/* =========================================================
+   SCREENSHOT INSTRUCTION
+   ========================================================= */
+
+#fc-screenshot-instruction {
+  position: fixed;
+
+  top: 87px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  padding: 8px 13px;
+
+  border-radius: 8px;
+
+  background:
+    rgba(10, 16, 13, 0.9);
+
+  color: #c7d2cd;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  font-size: 11px;
+
+  line-height: 1.3;
+
+  white-space: nowrap;
+
+  pointer-events: none;
+
+  z-index: 9;
+}
+
+
+/* =========================================================
+   SCREENSHOT SELECTION
+   ========================================================= */
+
+#fc-screenshot-selection {
+  position: fixed;
+
+  left: 100px;
+  top: 100px;
+
+  width: 400px;
+  height: 250px;
+
+  background: transparent;
+
+  border:
+    2px solid #34d399;
+
+  box-shadow:
+    0 0 0 99999px rgba(0, 0, 0, 0.62),
+    0 0 25px rgba(16, 185, 129, 0.25);
+
+  z-index: 8;
+
+  cursor: move;
+}
+
+#fc-screenshot-selection::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  border:
+    1px solid rgba(52, 211, 153, 0.8);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   RESIZE HANDLES
+   ========================================================= */
+
+.fc-resize-handle {
+  position: absolute;
+
+  width: 13px;
+  height: 13px;
+
+  border:
+    2px solid #10b981;
+
+  border-radius: 50%;
+
+  background:
+    #ecfdf5;
+
+  z-index: 5;
+
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.5);
+
+  transition:
+    transform 0.1s ease,
+    background 0.1s ease,
+    border-color 0.1s ease;
+}
+
+.fc-resize-handle:hover {
+  background: #d1fae5;
+
+  border-color: #34d399;
+
+  transform: scale(1.25);
+}
+
+.fc-resize-handle.nw {
+  top: -7px;
+  left: -7px;
+  cursor: nwse-resize;
+}
+
+.fc-resize-handle.ne {
+  top: -7px;
+  right: -7px;
+  cursor: nesw-resize;
+}
+
+.fc-resize-handle.se {
+  bottom: -7px;
+  right: -7px;
+  cursor: nwse-resize;
+}
+
+.fc-resize-handle.sw {
+  bottom: -7px;
+  left: -7px;
+  cursor: nesw-resize;
+}
+
+.fc-resize-handle.n {
+  top: -7px;
+  left: 50%;
+
+  cursor: ns-resize;
+
+  transform:
+    translateX(-50%);
+}
+
+.fc-resize-handle.n:hover {
+  transform:
+    translateX(-50%)
+    scale(1.25);
+}
+
+.fc-resize-handle.s {
+  bottom: -7px;
+  left: 50%;
+
+  cursor: ns-resize;
+
+  transform:
+    translateX(-50%);
+}
+
+.fc-resize-handle.s:hover {
+  transform:
+    translateX(-50%)
+    scale(1.25);
+}
+
+.fc-resize-handle.e {
+  right: -7px;
+  top: 50%;
+
+  cursor: ew-resize;
+
+  transform:
+    translateY(-50%);
+}
+
+.fc-resize-handle.e:hover {
+  transform:
+    translateY(-50%)
+    scale(1.25);
+}
+
+.fc-resize-handle.w {
+  left: -7px;
+  top: 50%;
+
+  cursor: ew-resize;
+
+  transform:
+    translateY(-50%);
+}
+
+.fc-resize-handle.w:hover {
+  transform:
+    translateY(-50%)
+    scale(1.25);
+}
+
+
+/* =========================================================
+   IMAGE VIEWER
+   ========================================================= */
+
+.fc-image-viewer {
+  position: fixed;
+
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 45px;
+
+  background:
+    rgba(3, 8, 6, 0.95);
+
+  z-index: 2147483647;
+
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+.fc-image-viewer img {
+  max-width: 100%;
+  max-height: 100%;
+
+  object-fit: contain;
+
+  border-radius: 10px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.12);
+
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.7);
+}
+
+.fc-image-viewer-close {
+  position: absolute;
+
+  top: 18px;
+  right: 20px;
+
+  width: 42px;
+  height: 42px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 12px;
+
+  background:
+    rgba(255, 255, 255, 0.07);
+
+  color: #dce7e1;
+
+  font-size: 18px;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease,
+    color 0.15s ease;
+}
+
+.fc-image-viewer-close:hover {
+  background:
+    rgba(239, 68, 68, 0.18);
+
+  color: #fb7185;
+
+  transform: scale(1.05);
+}
+
+
+/* =========================================================
+   SCREENSHOT MEDIA
+   ========================================================= */
+
+.fc-screenshot-item {
+  position: relative;
+
+  background: #111815;
+}
+
+.fc-screenshot-item img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* =========================================================
+   FOCUS
+   ========================================================= */
+
+#fc-floating-btn:focus-visible,
+#fc-chatbox button:focus-visible,
+#fc-chatbox input:focus-visible,
+.fc-screenshot-button:focus-visible {
+  outline:
+    2px solid #34d399;
+
+  outline-offset: 2px;
+}
+
+
+/* =========================================================
+   SCREENSHOT ACTIVE
+   ========================================================= */
+
+#fc-screenshot-selection:active {
+  cursor: grabbing;
+}
+
+#fc-screenshot-overlay,
+#fc-screenshot-overlay * {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  #fc-floating-btn {
+    right: 16px;
+    bottom: 16px;
+
+    width: 54px;
+    height: 54px;
+
+    border-radius: 16px;
+  }
+
+  #fc-chatbox {
+    right: 10px;
+    bottom: 82px;
+
+    width:
+      calc(100vw - 20px);
+
+    height:
+      min(590px, calc(100vh - 100px));
+
+    border-radius: 20px;
+  }
+
+  #fc-chatbox-header {
+    height: 62px;
+    min-height: 62px;
+    flex-basis: 62px;
+  }
+
+  #fc-tabs {
+    height: 49px;
+    min-height: 49px;
+    flex-basis: 49px;
+  }
+
+  #fc-tabs .fc-tab {
+    font-size: 10px;
+  }
+
+  #fc-chatbox-messages {
+    padding: 14px;
+  }
+
+  .fc-message {
+    max-width: 84%;
+  }
+
+  #fc-chatbox-input-row {
+    height: 66px;
+    min-height: 66px;
+    flex-basis: 66px;
+
+    padding: 10px;
+  }
+
+  #fc-chatbox-input {
+    height: 42px;
+  }
+
+  #fc-chatbox-send {
+    height: 42px;
+
+    padding: 0 13px;
+  }
+
+  #fc-screenshot-topbar {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+
+    height: 54px;
+
+    padding:
+      0 8px 0 11px;
+
+    border-radius: 13px;
+  }
+
+  #fc-screenshot-title {
+    font-size: 12px;
+  }
+
+  .fc-screenshot-title-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .fc-screenshot-button {
+    height: 32px;
+
+    padding: 0 10px;
+
+    font-size: 11px;
+  }
+
+  #fc-screenshot-instruction {
+    top: 72px;
+
+    max-width:
+      calc(100vw - 24px);
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+  }
+
+  .fc-image-viewer {
+    padding: 25px;
+  }
+}
